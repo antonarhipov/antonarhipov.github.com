@@ -2,7 +2,7 @@
 title: "Spec-Driven Development with AI Agents: From High-Level Requirements to Working Software"
 order: 6
 summary: "A practical framework for turning AI coding agents into reliable partners using structured requirements, plans, and task lists."
-slidesUrl: "https://speakerdeck.com/antonantonarhipov/spec-driven-development"
+slidesUrl: "https://speakerdeck.com/antonarhipov"
 videoUrl: "https://www.youtube.com/watch?v=cTJorhnxrFI"
 tags: ["ai", "productivity", "sdd"]
 ---
