@@ -1,0 +1,44 @@
+---
+const { pathname } = Astro.url;
+const { title } = Astro.props;
+const segments = pathname.split('/').filter(Boolean);
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  ...segments.map((segment, index) => {
+    const href = `/${segments.slice(0, index + 1).join('/')}`;
+    // Use title for the last segment if provided
+    const isLast = index === segments.length - 1;
+    const label = (isLast && title) 
+      ? title 
+      : segment.replace(/-/g, ' ');
+    return { label, href };
+  }),
+];
+
+// Handle case where we might be on home
+const isHome = segments.length === 0;
+---
+
+{!isHome && (
+  <nav class="mb-8" aria-label="Breadcrumb">
+    <ol class="flex flex-wrap list-none p-0 m-0 font-mono text-[10px] sm:text-xs gap-1">
+      {breadcrumbs.map((crumb, index) => (
+        <li class="flex items-center gap-1">
+          {index < breadcrumbs.length - 1 ? (
+            <>
+              <a href={crumb.href} class="text-muted-foreground transition-colors hover:text-foreground hover:bg-muted px-1.5 py-0.5 rounded">
+                {crumb.label}
+              </a>
+              <span class="text-border select-none text-[10px]">/</span>
+            </>
+          ) : (
+            <span class="text-foreground font-medium px-1.5 py-0.5" aria-current="page">
+              {crumb.label}
+            </span>
+          )}
+        </li>
+      ))}
+    </ol>
+  </nav>
+)}

@@ -1,0 +1,53 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const talks = await getCollection('talks');
+  return talks.map(talk => ({
+    params: { slug: talk.id },
+    props: { talk },
+  }));
+}
+
+const { talk } = Astro.props;
+const { Content } = await render(talk);
+---
+
+<BaseLayout title={talk.data.title}>
+  <article class="pt-24 pb-16 md:pt-32 md:pb-24">
+    <div class="container mx-auto px-6 max-w-[65ch]">
+      <Breadcrumbs title={talk.data.title} />
+      
+      <header class="mb-12">
+        <h1 class="text-3xl md:text-4xl font-bold mb-6 tracking-tight text-foreground">{talk.data.title}</h1>
+        <div class="flex flex-wrap gap-2 mb-6">
+          {talk.data.tags.map(tag => <Badge variant="secondary">{tag}</Badge>)}
+        </div>
+        <div class="flex flex-wrap gap-4">
+          {talk.data.slidesUrl && (
+            <Button variant="outline" size="sm" asChild>
+              <a href={talk.data.slidesUrl} target="_blank" rel="noopener">
+                Slides ↗
+              </a>
+            </Button>
+          )}
+          {talk.data.videoUrl && (
+            <Button variant="outline" size="sm" asChild>
+              <a href={talk.data.videoUrl} target="_blank" rel="noopener">
+                Watch ↗
+              </a>
+            </Button>
+          )}
+        </div>
+      </header>
+
+      <div class="prose prose-zinc dark:prose-invert max-w-none prose-headings:text-foreground prose-a:text-primary prose-a:underline-offset-4 hover:prose-a:text-primary/80 transition-colors prose-pre:bg-muted prose-pre:border prose-pre:border-border">
+        <Content />
+      </div>
+    </div>
+  </article>
+</BaseLayout>

@@ -1,0 +1,183 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+import antonImg from '@/assets/anton.png';
+import { getCollection } from 'astro:content';
+import { Button } from '@/components/ui/button';
+import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Separator } from '@/components/ui/separator';
+import { compareTalks } from '@/lib/talks';
+
+const recentPosts = (await getCollection('blog'))
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+const recentTalks = (await getCollection('talks'))
+  .filter(talk => !talk.data.draft)
+  .sort(compareTalks)
+  .slice(0, 2);
+
+const startHere = {
+  talk: {
+    label: 'Debugging talk',
+    href: '/talks/00-debugging-with-intellijidea',
+    description: 'A live coding tour of advanced debugger features and techniques.',
+  },
+  debuggingPost: {
+    label: 'Debugging post',
+    href: '/blog/00-debugging-with-intellij-idea',
+    description: 'Why mastering your debugger is the highest-leverage skill for any developer.',
+  },
+  jcmdPost: {
+    label: 'JVM diagnostics',
+    href: '/blog/10-jcmd',
+    description: 'Practical JVM diagnostics with `jcmd` and related tools.',
+  },
+  agentic: {
+    label: 'Agentic workflows',
+    href: '/blog',
+    description: 'Notes and experiments on AI-assisted workflows (more coming soon).',
+    isPlaceholder: true,
+  },
+};
+---
+
+<BaseLayout title="Home">
+  <!-- Hero -->
+  <section class="pt-24 pb-16 md:pt-32 md:pb-24">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-col md:flex-row gap-12 md:gap-16 items-center md:items-center justify-between">
+        <div class="flex-1">
+          <div class="flex items-center gap-2 mb-8">
+            <span class="text-xs font-mono text-muted-foreground tracking-wider">signal::active</span>
+            <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+          </div>
+
+      <h1 class="text-4xl md:text-6xl font-bold mb-8 leading-tight tracking-tight text-foreground">
+        Anton Arhipov
+      </h1>
+
+      <p class="text-lg md:text-2xl text-foreground leading-relaxed max-w-[52ch] mb-4">
+        Exploring how developer tools shape the way we build software.
+      </p>
+
+      <p class="text-xs font-mono text-muted-foreground tracking-wider mb-6">
+        Developer Advocate at JetBrains
+      </p>
+
+      <p class="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-[52ch] mb-12">
+        I share practical workflows for debugging, feedback loops, and developer productivity — mostly in the JVM
+        ecosystem. Lately I’ve been experimenting with agentic, AI-assisted workflows and the new ways they change
+        how we design, build, and debug software.
+      </p>
+
+      <div class="flex flex-wrap gap-2 mb-10">
+        <Badge variant="outline">Developer workflows</Badge>
+        <Badge variant="outline">Developer tooling</Badge>
+        <Badge variant="outline">JVM (Java/Kotlin)</Badge>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-4">
+        <Button asChild>
+          <a href="/blog">Read the blog</a>
+        </Button>
+        <Button variant="outline" asChild>
+          <a href="/talks">Watch talks</a>
+        </Button>
+        <a
+          href="/talks"
+          class="text-xs font-mono text-muted-foreground tracking-wider transition-colors hover:text-foreground"
+        >
+          Invite me to speak →
+        </a>
+      </div>
+
+      <div class="flex flex-wrap gap-3 mt-6">
+        <a href="https://www.linkedin.com/in/antonarhipov/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 rounded-md border border-border/60 bg-muted/40 px-3 py-1.5 text-xs font-mono text-muted-foreground transition-colors hover:text-foreground hover:border-primary/50">
+          LinkedIn
+        </a>
+        <a href="https://x.com/antonarhipov" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 rounded-md border border-border/60 bg-muted/40 px-3 py-1.5 text-xs font-mono text-muted-foreground transition-colors hover:text-foreground hover:border-primary/50">
+          X
+        </a>
+        <a href="https://bsky.app/profile/antonarhipov.bsky.social" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 rounded-md border border-border/60 bg-muted/40 px-3 py-1.5 text-xs font-mono text-muted-foreground transition-colors hover:text-foreground hover:border-primary/50">
+          BlueSky
+        </a>
+        <a href="https://github.com/antonarhipov/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 rounded-md border border-border/60 bg-muted/40 px-3 py-1.5 text-xs font-mono text-muted-foreground transition-colors hover:text-foreground hover:border-primary/50">
+          GitHub
+        </a>
+        <a href="https://www.youtube.com/@AntonArhipov" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 rounded-md border border-border/60 bg-muted/40 px-3 py-1.5 text-xs font-mono text-muted-foreground transition-colors hover:text-foreground hover:border-primary/50">
+          YouTube
+        </a>
+        <a href="https://speakerdeck.com/antonarhipov" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 rounded-md border border-border/60 bg-muted/40 px-3 py-1.5 text-xs font-mono text-muted-foreground transition-colors hover:text-foreground hover:border-primary/50">
+          SpeakerDeck
+        </a>
+      </div>
+        </div>
+        <div class="w-48 md:w-80 lg:w-96 shrink-0 mt-12 md:mt-0">
+          <Image src={antonImg} alt="Anton Arhipov" class="w-full h-auto rounded-3xl border border-border/50 shadow-xl opacity-90 hover:opacity-100 transition-opacity" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container mx-auto px-6 mb-16">
+    <Separator />
+  </div>
+
+  <!-- Recent writing -->
+  <section class="pb-16 md:pb-24">
+    <div class="container mx-auto px-6">
+      <span class="text-xs font-mono text-muted-foreground tracking-wider">Latest writing</span>
+      <div class="grid gap-6 mt-8">
+        {recentPosts.map(post => (
+          <a href={`/blog/${post.id}`} class="group block">
+            <Card className="transition-colors group-hover:border-primary/50">
+              <CardHeader>
+                <div class="flex flex-col gap-1">
+                  <time class="text-xs font-mono text-muted-foreground" datetime={post.data.date.toISOString()}>
+                    {post.data.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                  </time>
+                  <CardTitle className="group-hover:text-primary transition-colors">{post.data.title}</CardTitle>
+                </div>
+                <CardDescription>{post.data.description}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div class="flex flex-wrap gap-2">
+                  {post.data.tags.map(tag => <Badge variant="secondary">{tag}</Badge>)}
+                </div>
+              </CardContent>
+            </Card>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Recent talks -->
+  <section class="pb-24 md:pb-32">
+    <div class="container mx-auto px-6">
+      <span class="text-xs font-mono text-muted-foreground tracking-wider">Recent talks</span>
+      <div class="grid gap-6 mt-8">
+        {recentTalks.map(talk => (
+          <a href={`/talks/${talk.id}`} class="group block">
+            <Card className="transition-colors group-hover:border-primary/50">
+              <CardHeader>
+                <div class="flex flex-col gap-1">
+                  <CardTitle className="group-hover:text-primary transition-colors">{talk.data.title}</CardTitle>
+                  {talk.data.summary && <p class="text-sm text-muted-foreground mt-1">{talk.data.summary}</p>}
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div class="flex flex-wrap gap-2">
+                  {talk.data.tags.map(tag => <Badge variant="secondary">{tag}</Badge>)}
+                </div>
+              </CardContent>
+            </Card>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

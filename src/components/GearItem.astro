@@ -1,0 +1,20 @@
+---
+interface Props {
+  name: string;
+  role: string;
+  type: 'synth' | 'drum';
+}
+
+const { name, role, type } = Astro.props;
+---
+
+<div class="flex items-start gap-4 p-6 bg-card border border-border rounded-xl transition-colors hover:border-primary/50">
+  <div class:list={[
+    "w-2 h-2 rounded-full mt-2 shrink-0",
+    type === 'synth' ? "bg-primary" : "bg-muted-foreground"
+  ]}></div>
+  <div>
+    <h3 class="text-sm font-semibold mb-1">{name}</h3>
+    <p class="text-xs font-mono text-muted-foreground">{role}</p>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+---
+import { Card as ShadcnCard } from "@/components/ui/card";
+
+interface Props {
+  href?: string;
+  as?: any;
+  class?: string;
+  glowColor?: 'amber' | 'teal';
+  [x: string]: any;
+}
+
+const { href, as: Tag = href ? 'a' : 'div', class: className, ...rest } = Astro.props;
+---
+
+<Tag href={href} className="group block no-underline" {...rest}>
+  <ShadcnCard className={`p-6 md:p-10 transition-colors group-hover:border-foreground/20 ${className}`}>
+    <slot />
+  </ShadcnCard>
+</Tag>

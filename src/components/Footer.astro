@@ -1,0 +1,36 @@
+---
+const year = new Date().getFullYear();
+const links = [
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/antonarhipov/' },
+  { label: 'X', href: 'https://x.com/antonarhipov' },
+  { label: 'BlueSky', href: 'https://bsky.app/profile/antonarhipov.bsky.social' },
+  { label: 'GitHub', href: 'https://github.com/antonarhipov/' },
+  { label: 'YouTube', href: 'https://www.youtube.com/@AntonArhipov' },
+  { label: 'SpeakerDeck', href: 'https://speakerdeck.com/antonarhipov' },
+];
+---
+
+<footer class="border-t py-6 md:px-8 md:py-0">
+  <div class="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
+    <div class="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
+      <p class="text-center text-sm leading-loose text-muted-foreground md:text-left">
+        © {year} Anton · Developer Advocate @ JetBrains
+      </p>
+      <p class="text-center text-xs font-mono text-muted-foreground/60 md:text-left">
+        · Powered by coffee & analog synths
+      </p>
+    </div>
+    <div class="flex gap-4">
+      {links.map(link => (
+        <a 
+          href={link.href} 
+          class="text-xs font-mono text-muted-foreground transition-colors hover:text-foreground underline-offset-4 hover:underline" 
+          target="_blank" 
+          rel="noopener noreferrer"
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,82 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths({ paginate }) {
+  const posts = (await getCollection('blog'))
+    .filter(post => !post.data.draft)
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+  return paginate(posts, { pageSize: 10 });
+}
+
+const { page } = Astro.props;
+---
+
+<BaseLayout title="Blog" description="Writing about debugging, Spring Boot, Kotlin, AI-assisted development, and IDE productivity.">
+  <section class="pt-24 pb-16 md:pt-32 md:pb-24">
+    <div class="container mx-auto px-6 max-w-screen-md">
+      <Breadcrumbs />
+      <span class="text-xs font-mono text-muted-foreground tracking-wider">Blog</span>
+      <h1 class="text-4xl md:text-5xl font-bold mt-8 mb-4 tracking-tight">Writing</h1>
+      <p class="text-lg text-muted-foreground mb-16">
+        Thoughts on debugging, IDE productivity, Spring, Kotlin, and the occasional
+        foray into AI-assisted development.
+      </p>
+
+      <div class="grid gap-6">
+        {page.data.map((post) => (
+          <a href={`/blog/${post.id}`} class="group block">
+            <Card className="transition-colors group-hover:border-primary/50">
+              <CardHeader>
+                <div class="flex flex-col gap-1">
+                  <time class="text-xs font-mono text-muted-foreground" datetime={post.data.date.toISOString()}>
+                    {post.data.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                  </time>
+                  <CardTitle className="group-hover:text-primary transition-colors text-xl">{post.data.title}</CardTitle>
+                </div>
+                <CardDescription>{post.data.description}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div class="flex flex-wrap gap-2">
+                  {post.data.tags.map(tag => <Badge variant="secondary">{tag}</Badge>)}
+                </div>
+              </CardContent>
+            </Card>
+          </a>
+        ))}
+      </div>
+
+      {page.lastPage > 1 && (
+        <nav class="flex items-center justify-center gap-4 mt-16" aria-label="Pagination">
+          {page.url.prev ? (
+            <a href={page.url.prev} class="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-3 py-2 rounded-md hover:bg-muted">
+              <span aria-hidden="true">&larr;</span> Previous
+            </a>
+          ) : (
+            <span class="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground/40 px-3 py-2">
+              <span aria-hidden="true">&larr;</span> Previous
+            </span>
+          )}
+
+          <span class="text-sm font-mono text-muted-foreground">
+            {page.currentPage} / {page.lastPage}
+          </span>
+
+          {page.url.next ? (
+            <a href={page.url.next} class="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-3 py-2 rounded-md hover:bg-muted">
+              Next <span aria-hidden="true">&rarr;</span>
+            </a>
+          ) : (
+            <span class="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground/40 px-3 py-2">
+              Next <span aria-hidden="true">&rarr;</span>
+            </span>
+          )}
+        </nav>
+      )}
+    </div>
+  </section>
+</BaseLayout>

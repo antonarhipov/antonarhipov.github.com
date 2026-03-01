@@ -1,0 +1,62 @@
+---
+import { ModeToggle } from './ModeToggle';
+
+const navItems = [
+  { label: 'Blog', href: '/blog' },
+  { label: 'Talks', href: '/talks' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'Music', href: '/music' },
+  { label: 'Art', href: '/art' },
+];
+
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+
+const isActive = (path: string) => {
+  if (path === '/') return currentPath === '/';
+  return currentPath === path || currentPath.startsWith(`${path}/`);
+};
+---
+
+<header class="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+  <div class="container flex h-14 items-center justify-between">
+    <div class="mr-4 flex">
+      <a href="/" class="mr-6 flex items-center space-x-2" aria-label="Home">
+        <span class="font-bold sm:inline-block">
+          <span class="text-primary">▲</span>
+          <span class="ml-1">Home</span>
+        </span>
+      </a>
+      <nav class="hidden md:flex items-center space-x-6 text-sm font-medium">
+        {navItems.map(item => (
+          <a
+            href={item.href}
+            class:list={[
+              "transition-colors hover:text-foreground/80",
+              isActive(item.href) ? "text-foreground" : "text-foreground/60"
+            ]}
+          >
+            {item.label}
+          </a>
+        ))}
+      </nav>
+    </div>
+    <div class="flex flex-1 items-center justify-between space-x-2 md:justify-end">
+      <nav class="flex items-center space-x-2">
+        <div class="md:hidden flex items-center space-x-2 overflow-x-auto">
+           {navItems.map(item => (
+            <a
+              href={item.href}
+              class:list={[
+                "text-xs transition-colors hover:text-foreground/80",
+                isActive(item.href) ? "text-foreground" : "text-foreground/60"
+              ]}
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+        <ModeToggle client:load />
+      </nav>
+    </div>
+  </div>
+</header>

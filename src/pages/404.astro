@@ -1,0 +1,24 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { Button } from '@/components/ui/button';
+---
+
+<BaseLayout title="404: Signal Lost" description="Page not found. This signal drifted out of tune.">
+  <section class="h-[60vh] flex items-center justify-center text-center">
+    <div class="container mx-auto px-6 flex flex-col items-center">
+      <div class="flex flex-col items-center gap-4 mb-12">
+        <span class="w-2 h-2 rounded-full bg-primary/30"></span>
+        <span class="text-[10px] font-mono text-muted-foreground tracking-[0.12em]">signal::lost</span>
+      </div>
+      
+      <h1 class="text-4xl md:text-6xl font-bold mb-6 tracking-tight text-foreground">Signal lost.</h1>
+      <p class="text-lg text-muted-foreground mb-12 max-w-[40ch]">
+        This page doesn't exist — or maybe it drifted out of tune.
+      </p>
+      
+      <Button asChild size="lg">
+        <a href="/">Back to home</a>
+      </Button>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,56 @@
+---
+interface Props {
+  embedUrl?: string;
+  title: string;
+}
+
+const { embedUrl, title } = Astro.props;
+---
+
+{embedUrl ? (
+  <div class="audio-player mt-8 bg-muted border border-border rounded-lg overflow-hidden min-h-[120px]" data-url={embedUrl} data-title={title}>
+    <div class="h-[120px] flex items-center justify-center text-muted-foreground">
+      <span class="font-mono text-xs tracking-widest">signal::loading</span>
+    </div>
+  </div>
+) : (
+  <div class="audio-player mt-8 bg-background border border-border border-dashed rounded-lg overflow-hidden min-h-[120px]">
+    <div class="h-[120px] flex items-center justify-center text-muted-foreground">
+      <span class="font-mono text-xs tracking-widest">signal::awaiting_transmission</span>
+    </div>
+  </div>
+)}
+
+<script>
+  function initAudioPlayers() {
+    const players = document.querySelectorAll('.audio-player[data-url]');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const player = entry.target as HTMLElement;
+          const url = player.dataset.url;
+          const title = player.dataset.title;
+          
+          if (url) {
+            player.innerHTML = `
+              <iframe 
+                style="border: 0; width: 100%; height: 120px;" 
+                src="${url}" 
+                seamless
+                title="${title}"
+                loading="lazy"
+              ></iframe>
+            `;
+          }
+          observer.unobserve(player);
+        }
+      });
+    }, { rootMargin: '100px' });
+
+    players.forEach(player => observer.observe(player));
+  }
+
+  // Support View Transitions
+  document.addEventListener('astro:page-load', initAudioPlayers);
+</script>

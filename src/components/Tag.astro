@@ -1,0 +1,14 @@
+---
+import { Badge } from "@/components/ui/badge";
+
+interface Props {
+  variant?: 'amber' | 'teal';
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<Badge variant="outline" className={`font-mono text-[0.7rem] uppercase tracking-wider ${className}`}>
+  <slot />
+</Badge>
