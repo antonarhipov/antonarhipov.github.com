@@ -1,7 +1,7 @@
 ---
-title: "Sudo, Make Me a Sandwich! - Live coding with AI tools"
+title: "Kotlin Standard Library Gems"
 order: 3
-summary: "Demonstrating AI tools in IntelliJ IDEA. A fun live coding session, oriented on developer meetups"
+summary: "Kotlin's standard library has a lot of useful functionality to offer. In this presentation, we will unearth some hidden gems that will come in handy the next time you write Kotlin code."
 slidesUrl: "https://speakerdeck.com/antonarhipov/kotlin-standard-library-gems"
 videoUrl: "https://www.youtube.com/watch?v=nplDLhwm-lU"
 tags: ["Kotlin", "stdlib"]
