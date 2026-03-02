@@ -2,6 +2,7 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { getCollection } from 'astro:content';
 
 const projects = await getCollection('projects');
@@ -19,13 +20,17 @@ const projects = await getCollection('projects');
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {projects.map((project) => (
-          <a href={`/projects/${project.id}`} class="group block h-full">
+          <div class="group block h-full">
             <Card className="h-full transition-colors group-hover:border-primary/50 flex flex-col">
               <CardHeader>
                 <div class="mb-4">
                   <Badge variant="outline" className="font-mono text-[10px] tracking-wider uppercase-none">{project.data.category}</Badge>
                 </div>
-                <CardTitle className="group-hover:text-primary transition-colors text-xl">{project.data.title}</CardTitle>
+                <CardTitle className="transition-colors text-xl">
+                  <a href={`/projects/${project.id}`} class="group-hover:text-primary transition-colors">
+                    {project.data.title}
+                  </a>
+                </CardTitle>
                 <CardDescription className="flex-1">{project.data.description}</CardDescription>
               </CardHeader>
               <CardContent className="mt-auto">
@@ -34,9 +39,15 @@ const projects = await getCollection('projects');
                     <span class="text-[10px] font-mono text-muted-foreground">#{tag}</span>
                   ))}
                 </div>
+
+                <div class="flex flex-wrap gap-2 mt-4">
+                  <Button variant="outline" size="sm" asChild>
+                    <a href={`/projects/${project.id}`}>Details →</a>
+                  </Button>
+                </div>
               </CardContent>
             </Card>
-          </a>
+          </div>
         ))}
       </div>
     </div>

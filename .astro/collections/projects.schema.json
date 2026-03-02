@@ -19,7 +19,7 @@
         },
         "url": {
           "type": "string",
-          "default": "#"
+          "format": "uri"
         },
         "category": {
           "type": "string",

@@ -28,15 +28,15 @@ const { Content } = await render(project);
         <div class="flex flex-wrap gap-2 mb-6">
           {project.data.tags.map(tag => <Badge variant="secondary">{tag}</Badge>)}
         </div>
-        {project.data.url && project.data.url !== '#' && (
-          <div class="flex flex-wrap gap-4">
+        <div class="flex flex-wrap gap-4">
+          {project.data.url && (
             <Button variant="outline" size="sm" asChild>
               <a href={project.data.url} target="_blank" rel="noopener">
                 View project ↗
               </a>
             </Button>
-          </div>
-        )}
+          )}
+        </div>
       </header>
 
       <div class="prose prose-zinc dark:prose-invert max-w-none prose-headings:text-foreground prose-a:text-primary prose-a:underline-offset-4 hover:prose-a:text-primary/80 transition-colors prose-pre:bg-muted prose-pre:border prose-pre:border-border">
