@@ -20,6 +20,6 @@ I systematically work through every breakpoint type and configuration option:
 
 100% live debugging session — no slides. Every feature demonstrated on a Spring Boot application with realistic bugs.
 
-## Voxxed Days Amsterdam 2025
+## Devoxx France 2026
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/uRpWrcoL4Ws?si=Ug_1FjRvYSUOXNjz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/SUGQ_Y2b2nU?si=hpFLy67kN3P7xI6c" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
