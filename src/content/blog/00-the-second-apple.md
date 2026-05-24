@@ -1,6 +1,6 @@
 ---
 title: "The Second Apple"
-description: ""
+description: "A thought experiment about an apple on a table that shows why gathering more information often reinforces the same answer instead of revealing new ones — and why changing perspective or process is what uncovers the unknown unknowns."
 date: 2025-05-24
 tags: ["philosophy"]
 ---
