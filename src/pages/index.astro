@@ -17,7 +17,7 @@ const recentPosts = (await getCollection('blog'))
 const recentTalks = (await getCollection('talks'))
   .filter(talk => !talk.data.draft)
   .sort(compareTalks)
-  .slice(0, 2);
+  .slice(0, 5);
 
 const startHere = {
   talk: {
