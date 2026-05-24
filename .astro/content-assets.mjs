@@ -1,1 +1,7 @@
-export default new Map();
+
+import __ASTRO_IMAGE_IMPORT_ZbfXAj from "../../assets/00-apple-on-the-table-1.png?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2F00-the-second-apple.md";
+import __ASTRO_IMAGE_IMPORT_Z1VvBMh from "../../assets/00-apple-on-the-table-2.png?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2F00-the-second-apple.md";
+import __ASTRO_IMAGE_IMPORT_1npROG from "../../assets/00-apple-on-the-table-3.png?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2F00-the-second-apple.md";
+import __ASTRO_IMAGE_IMPORT_ZmOKmh from "../../assets/00-apple-on-the-table-4.png?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2F00-the-second-apple.md";
+export default new Map([["../../assets/00-apple-on-the-table-1.png?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2F00-the-second-apple.md", __ASTRO_IMAGE_IMPORT_ZbfXAj], ["../../assets/00-apple-on-the-table-2.png?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2F00-the-second-apple.md", __ASTRO_IMAGE_IMPORT_Z1VvBMh], ["../../assets/00-apple-on-the-table-3.png?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2F00-the-second-apple.md", __ASTRO_IMAGE_IMPORT_1npROG], ["../../assets/00-apple-on-the-table-4.png?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2F00-the-second-apple.md", __ASTRO_IMAGE_IMPORT_ZmOKmh]]);
+		
